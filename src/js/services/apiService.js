@@ -13,7 +13,7 @@ class Api {
 
   async countries() {
     try {
-      const response = await axios.get(`${this.url}/countries`)
+      const response = await axios.get(`${this.url}/countries`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -22,7 +22,16 @@ class Api {
   }
   async cities() {
     try {
-      const response = await axios.get(`${this.url}/cities`)
+      const response = await axios.get(`${this.url}/cities`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return Promise.reject(error)
+    }
+  }
+  async airlines() {
+    try {
+      const response = await axios.get(`${this.url}/airlines`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -32,15 +41,16 @@ class Api {
   async prices(params) {
     try {
       const response = await axios.get(`${this.url}/prices/cheap`, {
-        params,
+        headers: {
+          params
+        }
       })
-      return response.data;
+      return response.data
     } catch (error) {
       console.log(error);
       return Promise.reject(error)
     }
   }
-
 }
 
 const api = new Api(config);
